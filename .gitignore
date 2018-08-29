@@ -1,0 +1,10 @@
+bin
+packages
+FakesAssemblies
+obj
+*.suo
+Properties
+*.psess
+*.vsp
+!packages.config
+.user
