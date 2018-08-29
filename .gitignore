@@ -8,3 +8,4 @@ Properties
 *.vsp
 !packages.config
 .user
+.vs/config/applicationhost.config
