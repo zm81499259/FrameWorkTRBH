@@ -4,6 +4,7 @@ using IDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,9 +48,13 @@ namespace DALContainer
         public static void Initialise()
         {
             var builder = new ContainerBuilder();
+            var IDal = Assembly.Load("IDAL");
+            var Dal = Assembly.Load("DAL");
+            //程序集注入
+            builder.RegisterAssemblyTypes(IDal, Dal).Where(t => t.Name.EndsWith("DAL")).AsImplementedInterfaces();
             //格式：builder.RegisterType<xxxx>().As<Ixxxx>().InstancePerLifetimeScope();
-            builder.RegisterType<Base_UserInfoDAL>().As<IBase_UserInfoDal>().InstancePerLifetimeScope();
-            builder.RegisterType<EngineeringDAL>().As<IEngineeringDal>().InstancePerLifetimeScope();
+            //builder.RegisterType<Base_UserInfoDAL>().As<IBase_UserInfoDal>().InstancePerLifetimeScope();
+            //builder.RegisterType<EngineeringDAL>().As<IEngineeringDal>().InstancePerLifetimeScope();
             container = builder.Build();
         }
     }
